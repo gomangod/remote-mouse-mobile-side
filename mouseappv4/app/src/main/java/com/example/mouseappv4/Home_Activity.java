@@ -20,6 +20,8 @@ import java.util.Objects;
 public class Home_Activity extends AppCompatActivity {
     Button Findbutton;
     Button Touchpadbbutton;
+
+    Button CMD;
     public Intent i = new Intent(Home_Activity.this,TouchPad.class);
     LinearLayout layout;
     @SuppressLint("SetTextI18n")
@@ -30,8 +32,10 @@ public class Home_Activity extends AppCompatActivity {
         setContentView(R.layout.home);
         Findbutton = findViewById(R.id.button2);
         Touchpadbbutton = findViewById(R.id.button3);
+        CMD = findViewById(R.id.button7);
         Findbutton.setText("find a computer");
         Touchpadbbutton.setText("Touchpad");
+        CMD.setText("CMD");
         Findbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +49,15 @@ public class Home_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Home_Activity.this,TouchPad.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(i);
+            }
+        });
+
+        CMD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Home_Activity.this,CMD.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
             }

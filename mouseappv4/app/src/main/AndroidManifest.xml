@@ -27,6 +27,7 @@
             android:exported="true"/>
         <activity android:name=".TouchPad" android:launchMode="singleTask" android:exported="true"/>
         <activity android:name=".Connection" android:exported="true"/>
+        <activity android:name=".CMD" android:exported="true" android:launchMode="singleInstance" android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

@@ -55,6 +55,10 @@ public class retrofitbuilder {
         @POST("/action/Scroll")
         Call<Void> scroll(@Body ScrollState scrollState);
     }
+    interface CMD{
+        @POST("/cmd")
+        Call<ResponseBody> cmd(@Body String command);
+    }
     public static String ip = IP.getIP();
 
 
