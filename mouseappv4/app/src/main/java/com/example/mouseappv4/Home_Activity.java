@@ -22,8 +22,8 @@ public class Home_Activity extends AppCompatActivity {
     Button Findbutton;
     Button Touchpadbbutton;
 
-    Button CMD;
-    public Intent i = new Intent(Home_Activity.this,TouchPad.class);
+    Button Cmd;
+
     LinearLayout layout;
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,16 +33,16 @@ public class Home_Activity extends AppCompatActivity {
         setContentView(R.layout.home);
         Findbutton = findViewById(R.id.button2);
         Touchpadbbutton = findViewById(R.id.button3);
-        CMD = findViewById(R.id.button7);
+        Cmd = findViewById(R.id.button7);
         Findbutton.setBackgroundColor(Color.rgb(255,204,0));
         Findbutton.setTextColor(Color.rgb(0,0,0));
         Touchpadbbutton.setBackgroundColor(Color.rgb(255,204,0));
         Touchpadbbutton.setTextColor(Color.rgb(0,0,0));
-        CMD.setBackgroundColor(Color.rgb(255,204,0));
-        CMD.setTextColor(Color.rgb(0,0,0));
+        Cmd.setBackgroundColor(Color.rgb(255,204,0));
+        Cmd.setTextColor(Color.rgb(0,0,0));
         Findbutton.setText("find a computer");
         Touchpadbbutton.setText("Touchpad");
-        CMD.setText("CMD");
+        Cmd.setText("CMD");
         Findbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class Home_Activity extends AppCompatActivity {
             }
         });
 
-        CMD.setOnClickListener(new View.OnClickListener() {
+        Cmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Home_Activity.this,CMD.class);
