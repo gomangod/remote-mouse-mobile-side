@@ -33,19 +33,9 @@ public class FindingComputer extends AppCompatActivity {
     Button button;
     TextView text;
     String pcip;
-    String MyIP = getLocalIpAddress();
+    String MyIP;
     public String subnet;
-
-    {
-        try {
-            subnet = getBroadcastAddress(MyIP);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     LinearLayout buttonlayout;
-
     Button ipbutton;
     static List<String> clentipadd = new ArrayList<String>();
     List<String> buttonName = new ArrayList<String>();
@@ -66,7 +56,19 @@ public class FindingComputer extends AppCompatActivity {
         button = findViewById(R.id.button);
         text = findViewById(R.id.text);
         buttonlayout = findViewById(R.id.buttonlayout);
-
+        String MyIP = getLocalIpAddress();
+        if(MyIP == null) {
+            text.setText("No network connection");
+            return; // stop here safely
+        }
+        else {
+            text.setText("");
+        }
+        try {
+            subnet = getBroadcastAddress(MyIP);
+        } catch (UnknownHostException e) {
+            Log.e("finding", "instance initializer: ",e );
+        }
 
 
         button.setOnClickListener(new View.OnClickListener(){
@@ -77,7 +79,7 @@ public class FindingComputer extends AppCompatActivity {
                     try {
                         clinet();
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        Log.e("fin", "onClick: ",e );
                     }
                 }).start();
                 new Thread(() -> {
@@ -92,7 +94,6 @@ public class FindingComputer extends AppCompatActivity {
                 }).start();
                 try {
                     Thread.sleep(500);
-
                     if(buttonName.toArray().length == 0)
                     {
                         text.setText("no device found ");
@@ -154,7 +155,7 @@ public class FindingComputer extends AppCompatActivity {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("fin", "getLocalIpAddress: ", e);
         }
         return null;
     }
