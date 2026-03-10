@@ -1,6 +1,7 @@
 package com.example.mouseappv4;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,6 +57,10 @@ public class FindingComputer extends AppCompatActivity {
         button = findViewById(R.id.button);
         text = findViewById(R.id.text);
         buttonlayout = findViewById(R.id.buttonlayout);
+        text.setTextColor(Color.rgb(255,204,0));
+        button.setBackgroundColor(Color.rgb(255,204,0));
+        button.setTextColor(Color.rgb(0,0,0));
+        text.setText("press get device button");
         String MyIP = getLocalIpAddress();
         if(MyIP == null) {
             text.setText("No network connection");
@@ -167,6 +172,8 @@ public class FindingComputer extends AppCompatActivity {
         }
         for (int i = 0; i < noclient; i++) {
             ipbutton = new Button(this);
+            ipbutton.setBackgroundColor(Color.rgb(255,204,0));
+            ipbutton.setTextColor(Color.rgb(0,0,0));
             ipbutton.setId(i);
             ipbutton.setText(buttonName.get(i));
             buttonlayout.addView(ipbutton);

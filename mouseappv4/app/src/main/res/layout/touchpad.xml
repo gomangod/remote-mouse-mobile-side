@@ -5,6 +5,7 @@
     android:id="@+id/touchpad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:visibility="visible"
     tools:context=".TouchPad"
     tools:visibility="visible">
@@ -14,6 +15,7 @@
         android:id="@+id/body"
         android:layout_width="413dp"
         android:layout_height="656dp"
+        android:background="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,10 +38,10 @@
         android:id="@+id/slider"
         android:layout_width="186dp"
         android:layout_height="27dp"
-        android:valueFrom="0"
-        android:valueTo="5"
         android:stepSize="0.25"
         android:value="1"
+        android:valueFrom="0"
+        android:valueTo="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,7 +70,6 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,9 +90,9 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="157dp"
+        android:layout_width="140dp"
         android:layout_height="75dp"
-        android:background="#FFC107"
+
 
         android:text="left"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,10 +101,10 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="155dp"
+        android:layout_width="140dp"
         android:layout_height="75dp"
 
-        android:background="#FFC107"
+
         android:text="right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +114,7 @@
         android:id="@+id/button6"
         android:layout_width="106dp"
         android:layout_height="77dp"
-        android:background="#FFC107"
+
 
         android:text="mid"
         app:layout_constraintBottom_toBottomOf="parent"

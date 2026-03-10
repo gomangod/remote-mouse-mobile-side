@@ -4,6 +4,7 @@ import static com.example.mouseappv4.retrofitbuilder.hostInterceptor;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,12 @@ public class Home_Activity extends AppCompatActivity {
         Findbutton = findViewById(R.id.button2);
         Touchpadbbutton = findViewById(R.id.button3);
         CMD = findViewById(R.id.button7);
+        Findbutton.setBackgroundColor(Color.rgb(255,204,0));
+        Findbutton.setTextColor(Color.rgb(0,0,0));
+        Touchpadbbutton.setBackgroundColor(Color.rgb(255,204,0));
+        Touchpadbbutton.setTextColor(Color.rgb(0,0,0));
+        CMD.setBackgroundColor(Color.rgb(255,204,0));
+        CMD.setTextColor(Color.rgb(0,0,0));
         Findbutton.setText("find a computer");
         Touchpadbbutton.setText("Touchpad");
         CMD.setText("CMD");

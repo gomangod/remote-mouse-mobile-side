@@ -5,6 +5,7 @@ package com.example.mouseappv4;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -88,7 +89,8 @@ public class TouchPad extends AppCompatActivity {
                 LClicker();
             }
             if(NumberofClicks == 2){
-                Rclick();
+                LClicker();
+                LClicker();
             }
             NumberofClicks = 0;
         }
@@ -120,6 +122,16 @@ public class TouchPad extends AppCompatActivity {
         hostInterceptor.setHost(ip);
         editText.setVisibility(View.INVISIBLE);
         slider.setVisibility(View.INVISIBLE);
+        textView.setTextColor(Color.rgb(255,204,0));
+        Leftbutton.setBackgroundColor(Color.rgb(255,204,0));
+        Leftbutton.setTextColor(Color.rgb(0,0,0));
+        Rightbutton.setBackgroundColor(Color.rgb(255,204,0));
+        Rightbutton.setTextColor(Color.rgb(0,0,0));
+        Middlebutton.setBackgroundColor(Color.rgb(255,204,0));
+        Middlebutton.setTextColor(Color.rgb(0,0,0));
+        Keybord.setBackgroundColor(Color.rgb(255,204,0));
+        Keybord.setTextColor(Color.rgb(0,0,0));
+        slider.setBackgroundColor(Color.rgb(0,0,0));
         movingmouse();
         Keybord();
         Keyboradkeylistner();
@@ -332,14 +344,6 @@ public class TouchPad extends AppCompatActivity {
         sendspeed.send(xyspeed).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse( Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    try {
-                        String stringBody = response.body().string();
-                        textView.setText(stringBody);// Handle manually
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
 
             }
 
