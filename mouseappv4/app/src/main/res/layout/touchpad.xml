@@ -38,7 +38,7 @@
         android:id="@+id/slider"
         android:layout_width="186dp"
         android:layout_height="27dp"
-        android:stepSize="0.25"
+        android:stepSize="1"
         android:value="1"
         android:valueFrom="0"
         android:valueTo="5"
