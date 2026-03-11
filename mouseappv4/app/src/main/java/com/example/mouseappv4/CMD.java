@@ -49,7 +49,7 @@ public class CMD extends AppCompatActivity {
     );
 
     boolean ISkeybordON;
-    public static String ip = IP.getIP();
+    public String ip = IP.getIP();
     static HostSelectionInterceptor hostInterceptor = retrofitbuilder.hostInterceptor;
     private final Retrofit retrofit = retrofitbuilder.builder();
     retrofitbuilder.CMD cmd = retrofit.create(retrofitbuilder.CMD.class);
@@ -105,12 +105,7 @@ public class CMD extends AppCompatActivity {
                     if (lastchar.toString().contains("\n")) {
                         String command = editText.getText().toString().substring(0,editText.getText().length()-1);
                         Log.d("cmd", "onTextChanged: " + command);
-                        if(BLOCKED.stream().anyMatch(command.toLowerCase()::contains)){
-                            Output("commands of this kind are not allowed");
-                        }
-                        else {
                             sendingcmd(command);
-                        }
                     }
                 }
             }
@@ -135,13 +130,15 @@ public class CMD extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 ResponseBody body = response.body();
-                String msg = null;
                 try {
-                    msg = body.string();
+                    if(body != null){
+                        Output(body.string());
+                    } else {
+                        Output("empty response from server");
+                    }
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    Output("error reading response: " + e.getMessage());
                 }
-                Output(msg);
             }
 
             @Override

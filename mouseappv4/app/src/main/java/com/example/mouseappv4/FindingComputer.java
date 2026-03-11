@@ -3,6 +3,8 @@ package com.example.mouseappv4;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,12 +27,14 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class FindingComputer extends AppCompatActivity {
+
     Button button;
     TextView text;
     String pcip;
@@ -41,6 +45,16 @@ public class FindingComputer extends AppCompatActivity {
     static List<String> clentipadd = new ArrayList<String>();
     List<String> buttonName = new ArrayList<String>();
 
+    Handler discoveryHandler = new Handler(Looper.getMainLooper());
+    Runnable discoveryRunnable = () -> {
+        if(buttonName.size() == 0){
+            text.setText("no device found");
+        } else {
+            text.setText("devices found");
+            create(buttonName.size());
+            buttonName.clear();
+        }
+    };
 
 
 
@@ -80,6 +94,7 @@ public class FindingComputer extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 new Thread(() -> {
                     try {
                         clinet();
@@ -89,31 +104,12 @@ public class FindingComputer extends AppCompatActivity {
                 }).start();
                 new Thread(() -> {
                     try {
-
                         server();
-
-
                     } catch (IOException e) {
-
+                        Log.e("fin", "onClick: ",e );
                     }
                 }).start();
-                try {
-                    Thread.sleep(500);
-                    if(buttonName.toArray().length == 0)
-                    {
-                        text.setText("no device found ");
-                    }
-                    else {
-
-                        text.setText("devices found");
-                        create(buttonName.toArray().length);
-                        buttonName.removeAll(buttonName);
-                    }
-                } catch (InterruptedException e) {
-                    Log.e("no dievice found", "onClick: "+ e );
-                }
-
-
+                discoveryHandler.postDelayed(discoveryRunnable, 1000);
             }
         });
 
@@ -136,8 +132,9 @@ public class FindingComputer extends AppCompatActivity {
 
     public void server() throws IOException {
         ServerSocket ss = new ServerSocket(9122);
-        while (true) {
-
+        ss.setSoTimeout(1000);
+        try {
+            while (true) {
                 Socket s = ss.accept();
                 BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 pcip = br.readLine();
@@ -145,9 +142,13 @@ public class FindingComputer extends AppCompatActivity {
                 clentipadd.add(pcip);
                 buttonName.add(pcip);
                 s.close();
-                ss.close();
+
+            }
+        } catch ( SocketTimeoutException e) {
+            Log.d("fin", "server: "+e );
         }
-    }
+        ss.close();
+        }
 
 
     public String getLocalIpAddress() {
@@ -180,6 +181,7 @@ public class FindingComputer extends AppCompatActivity {
             ipbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    discoveryHandler.removeCallbacks(discoveryRunnable);
                     Log.d("like", "onClick: " + v.getId());
                     Connection.setIp(clentipadd.get(v.getId()));
                     Intent i = new Intent(FindingComputer.this, Connection.class);
@@ -201,6 +203,11 @@ public class FindingComputer extends AppCompatActivity {
             return InetAddress.getByAddress( bytes ).getHostAddress();
         }
         return "x.x.x.";
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        discoveryHandler.removeCallbacks(discoveryRunnable);
     }
 
 }

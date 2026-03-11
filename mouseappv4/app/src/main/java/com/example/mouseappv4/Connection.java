@@ -30,15 +30,9 @@ public class Connection extends AppCompatActivity {
 
 String devicename = Build.DEVICE;
 public static String ip;
-
     public static void setIp(String ip) {
         Connection.ip = ip;
     }
-
-    HostSelectionInterceptor hostInterceptor = retrofitbuilder.hostInterceptor;
-static Retrofit retrofit = retrofitbuilder.builder();
-
-static retrofitbuilder.Connection connection = retrofit.create(retrofitbuilder.Connection.class);
 
 @SuppressLint("MissingInflatedId")
 protected void onCreate(Bundle savedInstanceState){
@@ -61,7 +55,7 @@ protected void onCreate(Bundle savedInstanceState){
             s.close();
             listner();
         } catch (IOException e) {
-
+            Log.e("con", "onCreate: ",e );
         }
 
 

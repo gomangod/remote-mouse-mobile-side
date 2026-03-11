@@ -44,8 +44,6 @@ import retrofit2.Retrofit;
 
 
 public class TouchPad extends AppCompatActivity {
-
-    boolean MclickOn;
     boolean ISkeybordON = false;
     boolean backspoace;
     int NumberofClicks = 0;
@@ -65,7 +63,7 @@ public class TouchPad extends AppCompatActivity {
     Button Middlebutton;
     Button Keybord;
     ImageButton setting;
-    public static String ip = IP.getIP();
+    public String ip = IP.getIP();
     private static final int MOVE_INTERVAL = 16;
     private long lastMoveTime = 0;
     XYspeed xYspeed = new XYspeed(0,0);
@@ -289,11 +287,6 @@ public class TouchPad extends AppCompatActivity {
                     }
                 }
 
-                if(before > 0 && count > 0){
-
-                    String replaced = s.subSequence(start, start + count).toString();
-                    sendKey(replaced);
-                }
 
             }
         });
@@ -322,7 +315,7 @@ public class TouchPad extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                Log.e("TouchPad", "enter failed: " + t.getMessage());
             }
         });
     }
@@ -335,7 +328,7 @@ public class TouchPad extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                Log.e("TouchPad", "backspace failed: " + t.getMessage());
             }
         });
     }
@@ -377,7 +370,7 @@ public class TouchPad extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.e("TouchPad", "Lclick failed: " + t.getMessage());
             }
         });
     }
@@ -391,7 +384,7 @@ public class TouchPad extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.e("TouchPad", "Rclick failed: " + t.getMessage());
             }
         });
     }
@@ -405,7 +398,7 @@ public class TouchPad extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.e("TouchPad", "Mclick failed: " + t.getMessage());
             }
         });
     }
